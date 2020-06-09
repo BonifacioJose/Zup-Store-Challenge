@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "19a879ed-6811-4359-966e-45f4b79c5d29",
+		"name": "Zup Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Product] Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Product] Get Product By Identifier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/product/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Product] Post Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Notebook Acer Predator Helios 300\",\r\n    \"manufacturer\": \"Acer\",\r\n    \"sku\": \"44455354342\",\r\n    \"description\": \"Teste\",\r\n    \"price\": 3222.50\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Product] Put Product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Notebook Acer Predator Helios 500\",\r\n    \"identifier\": 1,\r\n    \"manufacturer\": \"Acer\",\r\n    \"sku\": \"44455354342\",\r\n    \"description\": \"Teste\",\r\n    \"price\": 6800.50\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Product] Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/product/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Order] Get Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Order] Get Order By Identifier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/order/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"order",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Order] Post Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerName\": \"José Bonifácio\",\r\n    \"customerPhone\": \"48 999751072\",\r\n    \"products\": [\r\n        {\r\n            \"identifier\": 2,\r\n            \"name\": \"Notebook Acer Predator Helios 300\",\r\n            \"manufacturer\": \"Acer\",\r\n            \"description\": \"Teste\",\r\n            \"sku\": \"44455354342\",\r\n            \"weight\": null,\r\n            \"height\": null,\r\n            \"width\": null,\r\n            \"depth\": null,\r\n            \"price\": 6800.50\r\n        },\r\n        {\r\n            \"identifier\": 3,\r\n            \"name\": \"Notebook Acer Predator Helios 300\",\r\n            \"manufacturer\": \"Acer\",\r\n            \"description\": \"Teste\",\r\n            \"sku\": \"44455354342\",\r\n            \"weight\": null,\r\n            \"height\": null,\r\n            \"width\": null,\r\n            \"depth\": null,\r\n            \"price\": 6800.50\r\n        }\r\n    ],\r\n    \"discount\": 2000\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Order] Put Order",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identifier\": 2,\r\n    \"products\": [\r\n        {\r\n            \"identifier\": 2,\r\n            \"name\": \"Notebook Acer Predator Helios 300\",\r\n            \"manufacturer\": \"Acer\",\r\n            \"description\": \"Teste\",\r\n            \"sku\": \"44455354342\",\r\n            \"weight\": null,\r\n            \"height\": null,\r\n            \"width\": null,\r\n            \"depth\": null,\r\n            \"price\": 6800.50\r\n        },\r\n        {\r\n            \"identifier\": 3,\r\n            \"name\": \"Notebook Acer Predator Helios 300\",\r\n            \"manufacturer\": \"Acer\",\r\n            \"description\": \"Teste\",\r\n            \"sku\": \"44455354342\",\r\n            \"weight\": null,\r\n            \"height\": null,\r\n            \"width\": null,\r\n            \"depth\": null,\r\n            \"price\": 3222.50\r\n        }\r\n    ],\r\n    \"customerName\": \"José Bonifácio\",\r\n    \"customerPhone\": \"48 999751072\",\r\n    \"discount\": 8000\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Order] Delete Order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/order/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,52 @@
+version: '3.7'
+services:
+  spring:
+    build: .
+    container_name: zup-challenge-store
+    environment:
+      - spring.data.mongodb.host=mongodb
+      - spring.data.mongodb.username=zup
+      - spring.data.mongodb.password=challenge123
+      - spring.data.mongodb.port=27017
+      - spring.data.mongodb.authentication-database=admin
+      - spring.data.mongodb.database=store
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb
+      - jaeger
+    networks:
+      - app-tier
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: zup
+      MONGO_INITDB_ROOT_PASSWORD: challenge123
+    ports:
+      - 27017:27017
+    hostname: mongodb
+    networks:
+      - app-tier
+    volumes:
+      - mongodb_data_container:/data/db
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411"
+    networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+volumes:
+  mongodb_data_container:

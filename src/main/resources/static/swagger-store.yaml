@@ -1,0 +1,283 @@
+swagger: "2.0"
+info:
+  description: "Sample API to manipulate products and orders"
+  version: "1.0.0"
+  title: "ZUP Challenge API"
+  contact:
+    email: "jose.bonifacio@zup.com.br"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/v1"
+tags:
+  - name: "product"
+    description: "Everything about your Products"
+  - name: "order"
+    description: "Everything about Orders"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /product:
+    post:
+      tags:
+        - "product"
+      summary: "Add a new product"
+      description: ""
+      operationId: "addProduct"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+        - "product"
+      summary: "Update an existing product"
+      description: ""
+      operationId: "updateProduct"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Product not found"
+        "405":
+          description: "Validation exception"
+  /products:
+    get:
+      tags:
+        - "product"
+      summary: "Find all products"
+      operationId: "getProducts"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+  /product/{productId}:
+    get:
+      tags:
+        - "product"
+      summary: "Find product by ID"
+      description: "Returns a single product"
+      operationId: "getProductById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "ID of product to return"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Product not found"
+    delete:
+      tags:
+        - "product"
+      summary: "Deletes a product"
+      description: ""
+      operationId: "deleteProduct"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "api_key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "productId"
+          in: "path"
+          description: "Product id to delete"
+          required: true
+          type: "string"
+      responses:
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Product not found"
+
+  /order:
+    post:
+      tags:
+        - "order"
+      summary: "Place an order for a product"
+      description: ""
+      operationId: "placeOrder"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "order placed for purchasing the product"
+          required: true
+          schema:
+            $ref: "#/definitions/Order"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Order"
+        "400":
+          description: "Invalid Order"
+    put:
+      tags:
+        - "order"
+      summary: "Update an existing order"
+      description: ""
+      operationId: "updateOrder"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Order"
+      responses:
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Order not found"
+        "405":
+          description: "Validation exception"
+  /orders:
+    get:
+      tags:
+        - "order"
+      summary: "Find all orders"
+      operationId: "getOrders"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+  /order/{orderId}:
+    get:
+      tags:
+        - "order"
+      summary: "Find purchase order by ID"
+      operationId: "getOrderById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "orderId"
+          in: "path"
+          description: "ID of product that needs to be fetched"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Order"
+        "404":
+          description: "Order not found"
+    delete:
+      tags:
+        - "order"
+      summary: "Delete purchase order by ID"
+      operationId: "deleteOrder"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "orderId"
+          in: "path"
+          description: "ID of the order that needs to be deleted"
+          required: true
+          type: "string"
+      responses:
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Order not found"
+definitions:
+  Order:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      customerName:
+        type: "string"
+        example: "Jose"
+      customerPhone:
+        type: "string"
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+      discount:
+        type: "number"
+        format: "double"
+      productsTotal:
+        type: "number"
+        format: "double"
+      total:
+        type: "number"
+        format: "double"
+  Product:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+        example: "Computer"
+      manufacturer:
+        type: "string"
+      description:
+        type: "string"
+      sku:
+        type: "string"
+      weight:
+        type: "number"
+        format: "double"
+      height:
+        type: "number"
+        format: "double"
+      width:
+        type: "number"
+        format: "double"
+      depth:
+        type: "number"
+        format: "double"
+      price:
+        type: "number"
+        format: "double"
